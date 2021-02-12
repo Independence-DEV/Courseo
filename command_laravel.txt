@@ -1,0 +1,17 @@
+php artisan make:controller HomeController
+
+php artisan make:model Post --migration
+php artisan make:seeder PostsTableSeeder
+php artisan make:factory PostFactory --model=Post
+
+php artisan migrate:fresh
+php artisan db:seed
+
+composer require laravel/ui
+php artisan ui bootstrap --auth
+
+php artisan route:list
+
+
+
+php artisan make:model Account --migration
