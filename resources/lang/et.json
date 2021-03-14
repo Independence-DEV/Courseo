@@ -1,0 +1,22 @@
+{
+    "Access": "Pääs",
+    "Welcome": "Tere tulemast !",
+    "Subscribe": "Telli",
+    "Your Email Address": "Sinu emaili aadress",
+    "You are now in the waiting list !": "Olete nüüd ootejärjekorras !",
+    "You already are in the waiting list !": "Olete juba ootejärjekorras !",
+    "Waiting list for beta testing.": "Beetatestimise ootejärjekord.",
+    "A simple platform to sell your online courses": "Lihtne platvorm veebikursuste müümiseks",
+    "Create your own online courses website!<br>With Courseo, selling your content becomes easy. We offer you a complete environment for your site creation, video hosting, blogging and SEO optimization to make you visible on the internet.<br>Courseo is simple, and automated: try us now!": "Looge oma veebikursuste veebisait! <br> Courseo abil muutub teie sisu müümine lihtsaks. Pakume teile saidi loomiseks, videohostimiseks, ajaveebi pidamiseks ja SEO optimeerimiseks täielikku keskkonda, et muuta teid Internetis nähtavaks. <br> Courseo on lihtne ja automatiseeritud: proovige kohe! ",
+
+    "failed" : "These credentials do not match our records.",
+    "password" : "The provided password is incorrect.",
+    "throttle" : "Too many login attempts. Please try again in :seconds seconds.",
+    "previous" : "&laquo; Previous",
+    "next" : "Next &raquo;",
+    "reset" : "Your password has been reset!",
+    "sent" : "We have emailed your password reset link!",
+    "throttled" : "Please wait before retrying.",
+    "token" : "This password reset token is invalid.",
+    "user" : "We can't find a user with that email address."
+}

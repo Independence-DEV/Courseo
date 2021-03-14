@@ -1,0 +1,23 @@
+{
+    "Access": "Accès",
+    "Welcome": "Bienvenue",
+    "Subscribe": "S'inscrire",
+    "Your Email Address": "Votre adresse mail",
+    "You are now in the waiting list !": "Vous êtes maintenant sur la liste d'attente !",
+    "You already are in the waiting list !": "Vous êtes déjà sur la liste d'attente !",
+    "Waiting list for beta testing.": "Liste d'attente pour la Bêta.",
+    "A simple platform to sell your online courses": "Une platforme simple pour vendre ses formations en ligne",
+    "Create your own online courses website!<br>With Courseo, selling your content becomes easy. We offer you a complete environment for your site creation, video hosting, blogging and SEO optimization to make you visible on the internet.<br>Courseo is simple, and automated: try us now!": "Créer votre site personnalisé de formations en ligne !<br>Avec Courseo, vendre son contenu devient facile. Nous vous offrons un environnement pour la création de votre site avec hébergement de vos vidéos, blog, et optimisations le SEO pour vous rendre visible sur le web.<br>Courseo est simple, et automatisé : essayez-nous dès maintenant !",
+
+    "Password": "Mot de passe",
+    "failed" : "These credentials do not match our records.",
+    "password" : "The provided password is incorrect.",
+    "throttle" : "Too many login attempts. Please try again in :seconds seconds.",
+    "previous" : "&laquo; Previous",
+    "next" : "Next &raquo;",
+    "reset" : "Your password has been reset!",
+    "sent" : "We have emailed your password reset link!",
+    "throttled" : "Please wait before retrying.",
+    "token" : "This password reset token is invalid.",
+    "user" : "We can't find a user with that email address."
+}

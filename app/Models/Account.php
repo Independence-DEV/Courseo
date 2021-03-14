@@ -20,4 +20,20 @@ class Account extends Model
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function tags(){
+        return $this->hasMany(Tag::class);
+    }
+
+    public function courses(){
+        return $this->hasMany(Course::class);
+    }
+
+    public function indexPage(){
+        return $this->hasOne(IndexPage::class);
+    }
+
+    public function prospects(){
+        return $this->hasMany(Prospect::class);
+    }
 }

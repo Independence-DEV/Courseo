@@ -82,6 +82,9 @@ return [
 
     'locale' => 'en',
 
+    'description' => 'Create your website',
+    'author' => 'Courseo',
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -129,7 +132,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'nbrPages' => [
-        'posts' => 10,
+        'posts' => 6,
     ],
 
     /*
@@ -237,5 +240,11 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'languages' => [
+        'en' => 'gb',
+        'fr' => 'fr',
+        'et' => 'ee'
+    ]
 
 ];

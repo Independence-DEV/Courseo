@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'name', 'slug', 'account_id'
+        'title', 'slug', 'account_id'
     ];
+
+    public $timestamps = false;
 
     public function account(){
         return $this->belongsTo(Account::class);

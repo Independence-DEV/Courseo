@@ -9,12 +9,16 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+        <link rel="icon" href="{{ URL::asset('/favicon.png') }}" type="image/x-icon"/>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
     </head>
     <body>
     <header class="text-gray-600 body-font">
@@ -25,15 +29,33 @@
                 </svg>
                 <span class="ml-3 text-xl">{{ config('app.name', 'Courseo') }}</span>
             </a>
+            @if(count(config('app.languages')) > 1)
+            <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:w-auto md:inline md:mt-0 md:ml-4 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
+                    <span class="flag-icon flag-icon-{{ config('app.languages')[app()->getLocale()] }}"></span>
+                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </button>
+                <div x-show="open" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95" class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-16">
+                    <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                        @foreach($langs as $langLocale => $langName)
+                            <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:hover:bg-gray-600 dark-mode:focus:bg-gray-600 dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:text-gray-200 md:mt-0 hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline" href="{{ route('LangChange', $langLocale) }}"><span class="flag-icon flag-icon-{{ $langName }}"></span></a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            @endif
             <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-gray-900">Welcome</a>
+                <a class="mr-5 hover:text-gray-900">{{ __('Welcome') }}</a>
             </nav>
-            <a class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-red-500 hover:text-white rounded text-base mt-4 md:mt-0" href="{{ route('app.dashboard') }}">{{ __('app.access') }}
+            <a class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-red-500 hover:text-white rounded text-base mt-4 md:mt-0" href="{{ route('app.dashboard') }}">{{ __('Access') }}
                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
                     <path d="M5 12h14M12 5l7 7-7 7"></path>
                 </svg>
             </a>
         </div>
+
+
+
     </header>
     <section class="text-gray-600 body-font">
         <div class="container mx-auto flex px-5 py-4 md:flex-row flex-col items-center">
@@ -41,16 +63,9 @@
                 <img class="object-cover object-center rounded" alt="hero" src="{{ asset('images/welcome.jpg') }}">
             </div>
             <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Create, share and sell your online courses !</h1>
-                <p class="mb-8 leading-relaxed">Everything you need to start your online business easily with your own website, blog, memberships and courses catalog.</p>
-                <div class="flex w-full md:justify-start justify-center items-end">
-                    <div class="relative mr-4 lg:w-full xl:w-1/2 w-2/4">
-                        <label for="hero-field" class="leading-7 text-sm text-gray-600">Your Email Address :</label>
-                        <input type="text" id="hero-field" name="hero-field" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                    </div>
-                    <button class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Get it !</button>
-                </div>
-                <p class="text-sm mt-2 text-gray-500 mb-8 w-full">Waiting list for beta testing.</p>
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{ __('A simple platform to sell your online courses') }}</h1>
+                <p class="mb-8 leading-relaxed">{!! __('Create your own online courses website!<br>With Courseo, selling your content becomes easy. We offer you a complete environment for your site creation, video hosting, blogging and SEO optimization to make you visible on the internet.<br>Courseo is simple, and automated: try us now!') !!}</p>
+                <livewire:formwaitinglist />
             </div>
         </div>
     </section>
@@ -61,5 +76,6 @@
             </p>
         </div>
     </footer>
+    @livewireScripts
     </body>
 </html>

@@ -23,6 +23,7 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^25.0.0",
         "ckeditor5": "^25.0.0",
+        "flag-icon-css": "^3.5.0",
         "quill": "^1.3.6",
         "tinymce": "^5.7.0"
     }

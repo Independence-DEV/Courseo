@@ -15,15 +15,15 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('slug');
-            $table->string('seo_name')->nullable();
+            $table->string('seo_title')->nullable();
             $table->text('description');
             $table->text('content');
             $table->text('meta_description');
             $table->text('meta_keywords');
             $table->string('thumbnail')->nullable();
-            $table->boolean('online')->default(false);
+            $table->boolean('active')->default(false);
             $table->foreignId('account_id')
                 ->constrained()
                 ->onDelete('cascade')

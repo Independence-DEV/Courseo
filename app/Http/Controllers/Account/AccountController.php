@@ -3,33 +3,34 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
-use App\Models\Account;
-use App\Models\Post;
+use App\Models\Course;
+use App\Repositories\CourseRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 class AccountController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     /**
      * Display index page.
      *
      * @return \Illuminate\View\View
      */
-    public function index($account_subdomain)
+    public function index()
     {
-        $account = Account::where('subdomain', $account_subdomain)->first();
-        return view('account.index', compact('account'));
+        $courses = $this->courseRepository->getCourses();
+
+        return view('account.courses', compact('courses'));
     }
 
-    /**
-     * Display blog page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function posts($account_subdomain)
+    public function contact()
     {
-        $account = Account::where('subdomain', $account_subdomain)->first();
-        $posts = Post::where('account_id', $account->id)->get();
-        return view('account.posts', compact('account', 'posts'));
+        return view('account.contact');
     }
 }

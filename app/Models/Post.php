@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'seo_title', 'description', 'content', 'meta_description', 'meta_keywords', 'thumbnail', 'online', 'account_id'
+        'title', 'slug', 'seo_title', 'description', 'content', 'meta_description', 'meta_keywords', 'thumbnail', 'active', 'account_id'
     ];
 
     public function account(){
@@ -19,5 +19,10 @@ class Post extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
     }
 }

@@ -1,39 +1,36 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+@extends('layouts.account.template')
 
-    <title>{{ config('app.name', 'Courseo') }}</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-</head>
-    <body class="antialiased">
-    <header class="text-gray-600 body-font">
-        <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                <span class="ml-3 text-xl">{{ $account->name }}</span>
-            </a>
-            <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-                <a class="mr-5 hover:text-gray-900">Blog</a>
-                <a class="mr-5 hover:text-gray-900">Courses</a>
-            </nav>
+@section('main')
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-4 mx-auto">
+            <div class="flex flex-wrap -m-4 py-4">
+                @foreach($posts as $post)
+                <div class="p-4 md:w-1/3">
+                    <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                        <img src="" alt="" style="width:100%">
+                        <div class="p-6">
+                            <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                                @foreach ($post->categories as $category)
+                                    {{ $category->title }}
+                                @endforeach
+                            </h2>
+                            <h1 class="title-font text-lg font-medium text-gray-900 mb-3">{{ $post->title }}</h1>
+                            <p class="leading-relaxed mb-3">{{ $post->description }}</p>
+                            <div class="flex items-center flex-wrap ">
+                                <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0" href="{{ route('account.post', ['account_subdomain' => $account->subdomain, 'slug' => $post->slug]) }}">{{ __('Read More') }}
+                                    <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M5 12h14"></path>
+                                        <path d="M12 5l7 7-7 7"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            {{ $posts->links() }}
         </div>
-    </header>
+    </section>
+@endsection
 
-    @foreach($posts as $post)
-        {{ $post->name }}
-    @endforeach
-    </body>
-</html>

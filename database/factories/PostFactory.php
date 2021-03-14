@@ -22,7 +22,11 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'meta_description' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
+            'meta_keywords' => implode(',', $this->faker->words($nb = 3, $asText = false)),
+            'description' => $this->faker->paragraph($nbSentences = 4, $variableNbSentences = true),
+            'content' => $this->faker->paragraphs($nb = 8, $asText = true),
+            'active' => true,
         ];
     }
 }
