@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Config;
 use App\Models\IndexPage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,21 @@ class AppController extends Controller
         return view('app.dashboard', compact('account'));
     }
 
+    public function settings()
+    {
+        $user = Auth::user();
+        return view('app.settings', compact('user'));
+    }
+
+    public function editUser(Request $request)
+    {
+        $data = $request->all();
+        $this->validate($request, ['name' => 'required|string', 'email' => 'required|email']);
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->update($data);
+        return redirect('app/settings');
+    }
+
     /**
      * Display website.
      *
@@ -31,7 +47,8 @@ class AppController extends Controller
     {
         $account = Account::where('id', Auth::user()->account_id)->first();
         $config = Config::where('account_id', Auth::user()->account_id)->first();
-        return view('app.website', compact('account', 'config'));
+        $langs = config('app.languages_full');
+        return view('app.website', compact('account', 'config', 'langs'));
     }
 
     /**

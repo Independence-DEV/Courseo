@@ -24,4 +24,8 @@ class Course extends Model
     public function prospects(){
         return $this->belongsToMany(Prospect::class);
     }
+
+    public function customers(){
+        return $this->belongsToMany(Customer::class);
+    }
 }

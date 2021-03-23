@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Cashier\Billable;
 
 class Account extends Model
 {
     use HasFactory;
+    use Billable;
 
     protected $fillable = [
-        'name', 'subdomain', 'account_id'
+        'name', 'subdomain', 'domain', 'account_id'
     ];
 
     public function users(){
@@ -35,5 +37,9 @@ class Account extends Model
 
     public function prospects(){
         return $this->hasMany(Prospect::class);
+    }
+
+    public function customers(){
+        return $this->hasMany(Customer::class);
     }
 }

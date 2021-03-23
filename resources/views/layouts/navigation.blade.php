@@ -43,10 +43,11 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('app.settings')"
-                                         onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                            Settings
+                        <x-dropdown-link :href="route('app.subscriptions')">
+                            {{ __('Subscriptions') }}
+                        </x-dropdown-link>
+                        <x-dropdown-link :href="route('app.settings')">
+                            {{ __('Settings') }}
                         </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">

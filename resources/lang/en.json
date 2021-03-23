@@ -18,5 +18,9 @@
     "sent" : "We have emailed your password reset link!",
     "throttled" : "Please wait before retrying.",
     "token" : "This password reset token is invalid.",
-    "user" : "We can't find a user with that email address."
+    "user" : "We can't find a user with that email address.",
+
+    "Waiting List" : "Waiting List",
+    "You just subscribed to the waiting list. You will receive another email for access to the application." : "You just subscribed to the waiting list. You will receive another email for access to the application.",
+    "Thanks" : "Thanks"
 }

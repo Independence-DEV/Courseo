@@ -7,10 +7,28 @@ use Illuminate\Support\Str;
 
 class CourseRepository
 {
-    public function getCourses()
+    public function getCustomersCourses($customer)
     {
         $courses = Course::where('account_id', config('account.account_id'))
             ->whereActive(true)
+            ->customers()
+            ->get();
+
+        return $courses;
+    }
+
+    public function getActiveCourses()
+    {
+        $courses = Course::where('account_id', config('account.account_id'))
+            ->whereActive(true)
+            ->get();
+
+        return $courses;
+    }
+
+    public function getCourses()
+    {
+        $courses = Course::where('account_id', config('account.account_id'))
             ->get();
 
         return $courses;

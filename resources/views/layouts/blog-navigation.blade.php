@@ -4,7 +4,7 @@
             <x-subnav-link :href="route('app.blog.posts')" :active="request()->routeIs('app.blog.posts')">
                 {{ __('Posts') }}
             </x-subnav-link>
-            <x-subnav-link :href="route('app.blog.categories')" :active="request()->routeIs('app.blog.categories')">
+            <x-subnav-link :href="route('app.blog.categories.index')" :active="request()->routeIs('app.blog.categories.*')">
                 {{ __('Categories') }}
             </x-subnav-link>
         </div>

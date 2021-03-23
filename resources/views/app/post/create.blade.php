@@ -25,6 +25,12 @@
                                     </div>
 
                                     <div>
+                                        <x-label for="slug" :value="__('Slug')" />
+
+                                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" :value="old('slug')" required />
+                                    </div>
+
+                                    <div>
                                         <x-label for="description" :value="__('Description')" />
 
                                         <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
@@ -37,9 +43,12 @@
                                     </div>
 
                                     <div>
-                                        <x-label for="categories" :value="__('Categories')" />
-
-                                        <x-textarea id="categories" class="block mt-1 w-full" type="selectMultiple" name="categories" :value="old('description')" required />
+                                        <label class="block font-medium text-sm text-gray-700 inline-block align-middle">
+                                            <span class="text-gray-700">{{ __('Categories') }}</span>
+                                            <select id="categories" name="categories" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 my-2 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" multiple>
+                                                <option>Option 1</option>
+                                            </select>
+                                        </label>
                                     </div>
 
                                     <div>
@@ -88,6 +97,7 @@
 </x-app-layout>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
 <script>
     $(function() {
         $.fn.filemanager = function(type, options) {
@@ -118,6 +128,12 @@
             });
         }
         $('#lfm').filemanager('image');
+        $('#slug').keyup(function () {
+            $(this).val(getSlug($(this).val()))
+        })
+        $('#title').keyup(function () {
+            $('#slug').val(getSlug($(this).val()))
+        })
     });
     CKEDITOR.replace('content', { customConfig: '{{ asset('js/ckeditor.js') }}' });
 </script>

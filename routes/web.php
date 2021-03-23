@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\App\AppController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\App\PostController as AppPostController;
 use App\Http\Controllers\App\CourseController as AppCourseController;
@@ -33,8 +34,10 @@ Route::middleware('web')->domain(env('APP_URL'))->group(function (){
 });
 
 Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'auth'], function() {
-    Route::name('app.settings')->get('/settings', [AppController::class, 'dashboard']);
+    Route::name('app.settings')->get('/settings', [AppController::class, 'settings']);
+    Route::name('app.user.edit')->post('/settings/edit', [AppController::class, 'editUser']);
     Route::name('app.dashboard')->get('/', [AppController::class, 'dashboard']);
+    Route::name('app.subscriptions')->get('/subscriptions', [SubscriptionController::class, 'showSubscription']);
 
     Route::name('app.website')->get('/website', [AppController::class, 'website']);
     Route::name('app.website.config')->get('/website/config', [AppController::class, 'website']);
@@ -47,10 +50,11 @@ Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'aut
     Route::name('app.blog.post.create')->get('/blog/post/create', [AppPostController::class, 'create']);
     Route::name('app.blog.post.store')->post('/blog/post/store', [AppPostController::class, 'store']);
     Route::name('app.blog.post.edit')->get('/blog/post/edit/{id}', [AppPostController::class, 'edit']);
-    Route::name('app.blog.categories')->get('/blog/categories', [AppPostController::class, 'posts']);
-    Route::name('app.blog.categories.create')->get('/blog/category/create', [AppPostController::class, 'create']);
-    Route::name('app.blog.categories.store')->post('/blog/category/store', [AppPostController::class, 'store']);
-    Route::name('app.blog.categories.edit')->get('/blog/category/edit/{id}', [AppPostController::class, 'edit']);
+
+    Route::name('app.blog.categories.index')->get('/blog/categories', [AppPostController::class, 'categories']);
+    Route::name('app.blog.categories.store')->post('/blog/categories/store', [AppPostController::class, 'categories_store']);
+    Route::name('app.blog.categories.edit')->get('/blog/categories/edit/{id}', [AppPostController::class, 'categories_edit']);
+    Route::name('app.blog.categories.update')->put('/blog/categories/update/{id}', [AppPostController::class, 'categories_update']);
 
     Route::name('app.courses.list')->get('/courses/list', [AppCourseController::class, 'courses']);
     Route::name('app.courses.course.create')->get('/courses/course/create', [AppCourseController::class, 'create']);

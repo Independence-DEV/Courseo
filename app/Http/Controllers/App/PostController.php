@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,35 @@ class PostController extends Controller
     {
         $posts = Post::where('account_id', Auth::user()->account_id)->paginate($this->nbrPages);
         return view('app.posts', compact('posts'));
+    }
+
+    public function categories()
+    {
+        $categories = Category::where('account_id', Auth::user()->account_id)->get();
+        return view('app.categories', compact('categories'));
+    }
+
+    public function categories_store(Request $request)
+    {
+        $data = $request->all();
+        $data['account_id'] = Auth::user()->account_id;
+        Category::create($data);
+        return redirect('app/blog/categories');
+    }
+
+    public function categories_edit($id)
+    {
+        $categories = Category::where('account_id', Auth::user()->account_id)->get();
+        $current_category = Category::where('id', $id)->first();
+        return view('app.categories', compact('categories', 'current_category'));
+    }
+
+    public function categories_update($id, Request $request)
+    {
+        $data = $request->all();
+        $category = Category::where('id', $id)->first();
+        $category->update($data);
+        return redirect()->route('app.blog.categories.edit', ['id' => $category->id]);
     }
 
     /**

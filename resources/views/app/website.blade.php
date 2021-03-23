@@ -44,6 +44,25 @@
                                                         @endisset
                                                     </div>
                                                 </div>
+
+                                                <div class="col-span-3 sm:col-span-2">
+
+                                                    <x-label for="email_from" :value="__('Email From')" />
+
+                                                    <x-input id="email_from" class="block mt-1 w-full" type="email" name="email_from" :value="isset($config) ? $config->email_from : ''" />
+
+
+                                                </div>
+                                                <div class="col-span-3 sm:col-span-2">
+                                                    <label class="block font-medium text-sm text-gray-700 inline-block align-middle">
+                                                        {{ __('Language') }}
+                                                        <select name="lang" id="lang" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 my-2 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                                            @foreach($langs as $langLocale => $langName)
+                                                                <option value="{{ $langLocale }}" {{ $config->lang == $langLocale ? "selected" : "" }} class=""><span class="flag-icon flag-icon-{{ $langName }}"></span>{{ $langName }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </label>
+                                                </div>
                                             </div>
 
                                                 <div class="hidden sm:block" aria-hidden="true">

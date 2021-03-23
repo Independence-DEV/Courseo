@@ -20,10 +20,27 @@ class DatabaseSeeder extends Seeder
         DB::table('configs')->insert([
             [
                 'logo' => '',
+                'email_from' => 'test@test.test',
+                'lang' => 'fr',
                 'facebook_link' => '',
                 'twitter_link' => '',
                 'instagram_link' => '',
                 'linkedin_link' => '',
+                'account_id' => 1,
+            ]
+        ]);
+        DB::table('customers')->insert([
+            [
+                'name' => 'test',
+                'email' => 'test@test.test',
+                'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+                'account_id' => 1,
+            ]
+        ]);
+        DB::table('index_pages')->insert([
+            [
+                'content' => '',
+                'active_posts' => 1,
                 'account_id' => 1,
             ]
         ]);
@@ -42,6 +59,95 @@ class DatabaseSeeder extends Seeder
                 'title' => 'Category 3',
                 'slug' => 'category-3',
                 'account_id' => 1
+            ],
+        ]);
+        DB::table('courses')->insert([
+            [
+                'title' => 'test',
+                'slug' => 'test',
+                'description' => 'test',
+                'presentation' => 'test',
+                'price' => 0,
+                'active' => 0,
+                'account_id' => 1
+            ],
+        ]);
+        DB::table('chapters')->insert([
+            [
+                'title' => 'Chapter 1',
+                'slug' => 'chapter-1',
+                'order' => 1,
+                'course_id' => 1
+            ],
+            [
+                'title' => 'Chapter 2',
+                'slug' => 'chapter-2',
+                'order' => 2,
+                'course_id' => 1
+            ],
+            [
+                'title' => 'Chapter 3',
+                'slug' => 'chapter-3',
+                'order' => 3,
+                'course_id' => 1
+            ],
+        ]);
+        DB::table('lessons')->insert([
+            [
+                'title' => 'Lesson 1',
+                'slug' => 'lesson-1',
+                'content' => 'La lesson 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 1,
+                'chapter_id' => 1
+            ],
+            [
+                'title' => 'Lesson 2',
+                'slug' => 'lesson-2',
+                'content' => 'La lesson 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 2,
+                'chapter_id' => 1
+            ],
+            [
+                'title' => 'Lesson 3',
+                'slug' => 'lesson-3',
+                'content' => 'La lesson 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 3,
+                'chapter_id' => 1
+            ],
+            [
+                'title' => 'Lesson 1',
+                'slug' => 'lesson-1',
+                'content' => 'La lesson 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 1,
+                'chapter_id' => 2
+            ],
+            [
+                'title' => 'Lesson 2',
+                'slug' => 'lesson-2',
+                'content' => 'La lesson 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 2,
+                'chapter_id' => 2
+            ],
+            [
+                'title' => 'Lesson 1',
+                'slug' => 'lesson-1',
+                'content' => 'La lesson 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 1,
+                'chapter_id' => 3
+            ],
+            [
+                'title' => 'Lesson 2',
+                'slug' => 'lesson-2',
+                'content' => 'La lesson 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',
+                'video' => '',
+                'order' => 2,
+                'chapter_id' => 3
             ],
         ]);
         $nbrCategories = 3;

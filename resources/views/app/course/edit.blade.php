@@ -86,19 +86,19 @@
                                     <div class="col-span-4 sm:col-span-4">
                                         <x-label for="title" :value="__('Title')" />
 
-                                        <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="isset($account) ? $account->name : ''" required />
+                                        <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="$course->title" required />
                                     </div>
 
                                     <div class="col-span-4 sm:col-span-4">
                                         <x-label for="description" :value="__('Description')" />
 
-                                        <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
+                                        <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="$course->description" required />
                                     </div>
 
                                     <div class="col-span-1 sm:col-span-1">
                                         <x-label for="price" :value="__('Price')" />
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input type="number" min="0" step="any" name="price" id="price" class="w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
+                                            <input type="number" min="0" step="any" name="price" id="price" value="{{ $course->price }}" class="w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
                                             <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">€</span>
                                         </div>
                                     </div>
@@ -107,13 +107,13 @@
                                     <div class="col-span-3 sm:col-span-3">
                                         <x-label for="stripe_id" :value="__('Stripe API Key')" :tooltip="__('You can find your Stripe API Key on your Stripe account')" />
 
-                                        <x-input id="stripe_id" class="block mt-1 w-full" type="text" name="stripe_id" :value="isset($account) ? $account->name : ''" />
+                                        <x-input id="stripe_id" class="block mt-1 w-full" type="text" name="stripe_id" :value="$course->stripe_id" />
                                     </div>
 
                                     <div class="col-span-4 sm:col-span-4">
                                         <x-label for="presentation" :value="__('Presentation')" />
 
-                                        <x-textarea id="presentation" class="block mt-1 w-full" name="presentation" :value="old('presentation')" required />
+                                        <x-textarea id="presentation" class="block mt-1 w-full" name="presentation" :value="$course->presentation" required />
                                     </div>
                                 </div>
                             </div>

@@ -245,6 +245,12 @@ return [
         'en' => 'gb',
         'fr' => 'fr',
         'et' => 'ee'
+    ],
+
+    'languages_full' => [
+    'en' => 'English',
+    'fr' => 'Français',
+    'et' => 'Eesti'
     ]
 
 ];
