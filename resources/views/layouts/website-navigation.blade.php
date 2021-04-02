@@ -10,10 +10,10 @@
             <x-subnav-link :href="route('app.website.contactPage')" :active="request()->routeIs('app.website.contactPage')">
                 {{ __('Contact page') }}
             </x-subnav-link>
-            <x-subnav-link :href="route('app.website.config')" :active="false" :disable="true">
+            <x-subnav-link :href="route('app.website.custompage.list')" :active="request()->routeIs('app.website.custompage.list')" >
                 {{ __('Custom pages') }}
             </x-subnav-link>
-            <x-subnav-link :href="route('app.website.config')" :active="false" :disable="true">
+            <x-subnav-link :href="route('app.website.template')" :active="request()->routeIs('app.website.template')" >
                 {{ __('Templates') }}
             </x-subnav-link>
         </div>

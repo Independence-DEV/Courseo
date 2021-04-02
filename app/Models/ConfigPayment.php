@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CustomPage extends Model
+class ConfigPayment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title', 'slug', 'seo_title', 'content', 'meta_description', 'meta_keywords', 'active', 'account_id'
+        'stripe_publishable_key', 'stripe_secret_key'
     ];
 
     public function account(){

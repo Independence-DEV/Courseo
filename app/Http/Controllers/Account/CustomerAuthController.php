@@ -23,7 +23,7 @@ class CustomerAuthController extends Controller
         if(Auth::guard('webcustomer')
             ->attempt($request->only(['email', 'password', 'account_id'])))
         {
-            return redirect()->route('account.memberarea.home', $request->route('account_subdomain'));
+            return redirect()->route('account.memberarea.home', $request->route('domain'));
         }
 
         return redirect()
@@ -37,6 +37,6 @@ class CustomerAuthController extends Controller
             ->logout();
 
         return redirect()
-            ->route('account.memberarea.login', $request->route('account_subdomain'));
+            ->route('account.memberarea.login', $request->route('domain'));
     }
 }

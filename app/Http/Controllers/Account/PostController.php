@@ -49,7 +49,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function post($account_subdomain, $slug)
+    public function post($domain, $slug)
     {
         $post = $this->postRepository->getPostBySlug($slug);
         return view('account.post', compact('post'));

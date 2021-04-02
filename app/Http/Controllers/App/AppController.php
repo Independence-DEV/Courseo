@@ -5,10 +5,17 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Config;
+use App\Models\Course;
+use App\Models\Customer;
+use App\Models\CustomPage;
 use App\Models\IndexPage;
+use App\Models\Post;
+use App\Models\Prospect;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Object_;
+use stdClass;
 
 class AppController extends Controller
 {
@@ -20,7 +27,12 @@ class AppController extends Controller
     public function dashboard()
     {
         $account = Account::where('id', Auth::user()->account_id)->first();
-        return view('app.dashboard', compact('account'));
+        $data = new stdClass();
+        $data->nbProspects = Prospect::where('account_id', Auth::user()->account_id)->count();
+        $data->nbCustomers = Customer::where('account_id', Auth::user()->account_id)->count();
+        $data->nbPosts = Post::where('account_id', Auth::user()->account_id)->count();
+        $data->nbCourses = Course::where('account_id', Auth::user()->account_id)->count();
+        return view('app.dashboard', compact('account', 'data'));
     }
 
     public function settings()
@@ -101,8 +113,9 @@ class AppController extends Controller
     public function indexPageEdit(Request $request)
     {
         $data = $request->all();
+        if(isset($data['active_posts']) && ($data['active_posts'] == 'on')) $data['active_posts'] = 1;
+        else $data['active_posts'] = 0;
         //$this->validate($request, ['content' => 'required']);
-        $account = Account::where('id', Auth::user()->account_id)->firstOrFail();
         $indexPage = IndexPage::where('account_id', Auth::user()->account_id)->firstOrFail();
         $indexPage->update($data);
         return redirect('app/website/indexPage');
@@ -116,6 +129,54 @@ class AppController extends Controller
     public function contactPage()
     {
         $account = Account::where('id', Auth::user()->account_id)->first();
-        return view('app.website.contact-page', compact('account'));
+        return view('app.website.contactpage', compact('account'));
+    }
+
+    public function customPageList()
+    {
+        $account = Account::where('id', Auth::user()->account_id)->first();
+        $customPages = $account->customPages()->paginate(10);
+        return view('app.website.custompage-list', compact('customPages'));
+    }
+
+    public function customPageCreate()
+    {
+        return view('app.website.custompage-create');
+    }
+
+    public function customPageStore(Request $request)
+    {
+        $data = $request->all();
+        $data['account_id'] = Auth::user()->account_id;
+        CustomPage::create($data);
+        return redirect('app/website/custompage/list');
+    }
+
+    public function customPageEdit($id)
+    {
+        $customPage = CustomPage::where('id', $id)->first();
+        return view('app.website.custompage-edit', compact('customPage'));
+    }
+
+    public function customPageUpdate($id, Request $request)
+    {
+        $data = $request->all();
+        $post = CustomPage::find($id);
+        $post->update($data);
+        return redirect('app/website/custompage/list');
+    }
+
+    public function customPageDestroy()
+    {
+        $account = Account::where('id', Auth::user()->account_id)->first();
+        $customPages = $account->customPages()->paginate(10);
+        return view('app.website.custompage-list', compact('customPages'));
+    }
+
+
+    public function template()
+    {
+        $account = Account::where('id', Auth::user()->account_id)->first();
+        return view('app.website.template', compact('account'));
     }
 }

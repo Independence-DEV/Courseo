@@ -35,11 +35,23 @@ class Account extends Model
         return $this->hasOne(IndexPage::class);
     }
 
+    public function config(){
+        return $this->hasOne(Config::class);
+    }
+
+    public function configPayment(){
+        return $this->hasOne(ConfigPayment::class);
+    }
+
     public function prospects(){
         return $this->hasMany(Prospect::class);
     }
 
     public function customers(){
         return $this->hasMany(Customer::class);
+    }
+
+    public function customPages(){
+        return $this->hasMany(CustomPage::class);
     }
 }

@@ -6,7 +6,7 @@
         <div class="flex flex-col sm:flex-row">
             <div class="w-64 h-screen bg-white">
                 <div class="flex items-center justify-center mt-6">
-                    <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="{{ route('account.memberarea.home', ['account_subdomain' => $account->subdomain]) }}">
+                    <a class="flex title-font font-medium items-center text-gray-900 md:mb-0" href="{{ route('account.memberarea.home', ['domain' => $account->subdomain]) }}">
                         <span class="ml-3 text-xl">{{ $account->name }}</span>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
 
                         <div x-show="open" class="bg-gray-100">
                             @foreach($courses as $course)
-                                <a class="py-2 px-16 block text-sm text-gray-600 hover:bg-blue-500 hover:text-white" href="{{ route('account.memberarea.course', ['account_subdomain' => $account->subdomain, 'slug' => $course->slug]) }}">{{ $course->title }}</a>
+                                <a class="py-2 px-16 block text-sm text-gray-600 hover:bg-blue-500 hover:text-white" href="{{ route('account.memberarea.course', ['domain' => $account->subdomain, 'slug' => $course->slug]) }}">{{ $course->title }}</a>
                             @endforeach
                         </div>
                     </div>

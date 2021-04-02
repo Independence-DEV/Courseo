@@ -50,7 +50,6 @@
                                            @else
                                                 class="flex justify-start cursor-pointer text-gray-700 hover:text-white hover:bg-red-500 rounded-md px-2 py-2 my-2"
                                             @endif
-
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 inline-block align-middle">
                                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />

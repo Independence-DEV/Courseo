@@ -24,13 +24,13 @@ class CourseController extends Controller
      */
     public function courses()
     {
-        $courses = $this->courseRepository->getCourses();
+        $courses = $this->courseRepository->getActiveCourses();
         return view('account.courses', compact('courses'));
     }
 
-    public function course($account_subdomain, $slug)
+    public function course($domain, $slug)
     {
-        $course = $this->courseRepository->getCourseBySlug($slug);
+        $course = $this->courseRepository->getCourseActiveBySlug($slug);
         return view('account.course', compact('course'));
     }
 }

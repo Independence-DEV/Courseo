@@ -15,7 +15,19 @@ class CreateCustomPagesTable extends Migration
     {
         Schema::create('custom_pages', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->string('slug');
+            $table->string('seo_title')->nullable();
+            $table->text('content');
+            $table->text('meta_description');
+            $table->text('meta_keywords');
+            $table->boolean('active')->default(true);
+            $table->foreignId('account_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
+            $table->unique(['slug', 'account_id']);
         });
     }
 

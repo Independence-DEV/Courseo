@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
-            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ route('account.index', ['account_subdomain' => $account->subdomain]) }}">
+            <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ route('account.index', ['domain' => $account->subdomain]) }}">
                 <span class="ml-3 text-xl">{{ $account->name }}</span>
             </a>
         </x-slot>
@@ -12,7 +12,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('account.memberarea.handleLogin', ['account_subdomain' => $account->subdomain]) }}">
+        <form method="POST" action="{{ route('account.memberarea.handleLogin', ['domain' => $account->subdomain]) }}">
         @csrf
 
         <!-- Email Address -->

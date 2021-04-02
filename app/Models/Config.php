@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Config extends Model
 {
     protected $fillable = [
-        'logo', 'email_from', 'lang', 'facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'account_id'
+        'logo', 'email_from', 'lang', 'facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'youtube_link', 'github_link', 'account_id'
     ];
+
+    public function account(){
+        return $this->belongsTo(Account::class);
+    }
 }

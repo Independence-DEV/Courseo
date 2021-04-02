@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
-        <a href="{{ route('app.blog.posts') }}" class="inline-block align-middle" >
+        <a href="{{ route('app.website.custompage.list') }}" class="inline-block align-middle" >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-7 w-7 text-gray-500 hover:text-red-500">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
             </svg></a>
         <h2 class="font-semibold text-xl text-gray-800 leading-tight inline-block align-middle">
-            {{ __('Edit post') }}
+            {{ __('Edit a custom page') }}
         </h2>
     </x-slot>
 
@@ -14,7 +14,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <form action="{{ route('app.blog.post.update', ['id' => $post->id]) }}" method="POST">
+                        <form action="{{ route('app.website.custompage.update', ['id' => $customPage->id]) }}" method="POST">
                             @method('PUT')
                             @csrf
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
@@ -22,44 +22,19 @@
                                     <div>
                                         <x-label for="title" :value="__('Title')" />
 
-                                        <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="isset($post) ? $post->title : ''" required />
+                                        <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="isset($customPage) ? $customPage->title : ''" required />
                                     </div>
 
                                     <div>
                                         <x-label for="slug" :value="__('Slug')" />
 
-                                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" :value="isset($post) ? $post->slug : ''" required />
-                                    </div>
-
-                                    <div>
-                                        <x-label for="description" :value="__('Description')" />
-
-                                        <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="isset($post) ? $post->description : ''" required />
+                                        <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" :value="isset($customPage) ? $customPage->slug : ''" required />
                                     </div>
 
                                     <div>
                                         <x-label for="content" :value="__('Content')" />
 
-                                        <x-textarea id="content" class="block mt-1 w-full" name="content" :value="isset($post) ? $post->content : ''" required />
-                                    </div>
-
-                                    <div>
-                                        <label class="block font-medium text-sm text-gray-700 inline-block align-middle">
-                                            <span class="text-gray-700">{{ __('Categories') }}</span>
-                                            <select id="categories" name="categories[]" class="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 my-2 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" multiple>
-                                                @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}"
-                                                            {{ $post->categories->contains('id', $category->id) ? 'selected' : '' }}>
-                                                        {{ $category->title }}</option>
-                                                @endforeach
-                                            </select>
-                                        </label>
-                                    </div>
-
-                                    <div>
-                                        <x-label for="tags" :value="__('Tags')" />
-
-                                        <x-input id="tags" class="block mt-1 w-full" type="text" name="tags" :value="isset($post) ? implode(',', $post->tags->pluck('tag')->toArray()) : ''" required />
+                                        <x-textarea id="content" class="block mt-1 w-full" name="content" :value="isset($customPage) ? $customPage->content : ''" required />
                                     </div>
 
                                     <div class="hidden sm:block" aria-hidden="true">
@@ -71,19 +46,19 @@
                                     <div>
                                         <x-label for="seo_title" :value="__('SEO Title')" />
 
-                                        <x-input id="seo_title" class="block mt-1 w-full" type="text" name="seo_title" :value="isset($post) ? $post->seo_title : ''" />
+                                        <x-input id="seo_title" class="block mt-1 w-full" type="text" name="seo_title" :value="isset($customPage) ? $customPage->seo_title : ''" />
                                     </div>
 
                                     <div>
                                         <x-label for="meta_description" :value="__('META Description')" />
 
-                                        <x-textarea id="meta_description" class="block mt-1 w-full" type="text" name="meta_description" :value="isset($post) ? $post->meta_description : ''" />
+                                        <x-textarea id="meta_description" class="block mt-1 w-full" type="text" name="meta_description" :value="isset($customPage) ? $customPage->meta_description : ''" />
                                     </div>
 
                                     <div>
                                         <x-label for="meta_keywords" :value="__('META keywords')" />
 
-                                        <x-textarea id="meta_keywords" class="block mt-1 w-full" type="text" name="meta_keywords" :value="isset($post) ? $post->meta_keywords : ''" />
+                                        <x-textarea id="meta_keywords" class="block mt-1 w-full" type="text" name="meta_keywords" :value="isset($customPage) ? $customPage->meta_keywords : ''" />
                                     </div>
 
                                 </div>

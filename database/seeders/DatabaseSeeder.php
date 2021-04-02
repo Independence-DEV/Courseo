@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
                 'account_id' => 1,
             ]
         ]);
+        DB::table('config_payments')->insert([
+            [
+                'stripe_publishable_key' => '',
+                'stripe_secret_key' => '',
+                'account_id' => 1,
+            ]
+        ]);
         DB::table('customers')->insert([
             [
                 'name' => 'test',

@@ -1,3 +1,16 @@
+<style>
+    /* CHECKBOX TOGGLE SWITCH */
+    /* @apply rules for documentation, these do not work as inline style */
+    .toggle-checkbox:checked {
+        @apply: right-0 border-green-400;
+        right: 0;
+        border-color: #68D391;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+        @apply: bg-green-400;
+        background-color: #68D391;
+    }
+</style>
 <x-app-layout>
     @include('layouts.website-navigation')
     <div class="py-6">
@@ -10,6 +23,12 @@
                                 @csrf
                                 <div class="shadow sm:rounded-md sm:overflow-hidden">
                                     <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+
+                                        <x-label for="active_posts" :value="__('Active posts')" />
+                                        <div class="relative w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                                            <input {{ (isset($indexPage) && $indexPage->active_posts) ? 'checked' : '' }} type="checkbox" name="active_posts" id="active_posts" class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"/>
+                                            <label for="active_posts" class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                                        </div>
 
                                         <x-label for="content" :value="__('Content')" />
 

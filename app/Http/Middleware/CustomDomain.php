@@ -20,7 +20,7 @@ class CustomDomain
      */
     public function handle(Request $request, Closure $next)
     {
-        $domain = $request->route('account_domain');
+        $domain = $request->getHost();
         $account = Account::where('domain', $domain)->firstOrFail();
         $config = Config::where('account_id', $account->id)->firstOrFail();
 
@@ -36,6 +36,7 @@ class CustomDomain
         // Share tentant data with your views for easier
         // customization across the board
         View::share('account', $account);
+        View::share('domain', $domain);
         View::share('config', $config);
 
         return $next($request);

@@ -24,15 +24,12 @@ class MemberAreaController extends Controller
 
     public function paymentCourse($courseSlug, Request $request)
     {
-
         $course = Course::whereSlug($courseSlug)
             ->where('account_id', config('account.account_id'))
             ->firstOrFail();
         $prospect = Prospect::whereEmail($request->prospectEmail)
             ->where('account_id', config('account.account_id'))
             ->firstOrFail();
-
-        $test = $course->title;
 
         $stripe = new \Stripe\StripeClient(
             'sk_test_aitKH26s2pO2HK1KbZrMkUWf'
@@ -46,29 +43,41 @@ class MemberAreaController extends Controller
         return view('memberarea.payment', compact('course', 'prospect', 'intent'));
     }
 
-    public function processPaymentCourse($account_subdomain, $courseSlug, $prospectId, Request $request)
+    public function processPaymentCourse($domain, $courseSlug, $prospectId, Request $request)
     {
         $data = $request->all();
-        $test = $data['client_secret'];
         $stripe = new \Stripe\StripeClient(
             'sk_test_aitKH26s2pO2HK1KbZrMkUWf'
         );
-        $stripe->paymentIntents->confirm(
-            $data['stripe_id'],
-            ['payment_method' => 'pm_card_visa']
+        $paymentIntent = $stripe->paymentIntents->retrieve(
+            $data['stripe_id']
         );
+        if($paymentIntent->status == "succeeded"){
+            $course = Course::whereSlug($courseSlug)
+                ->where('account_id', config('account.account_id'))
+                ->firstOrFail();
+            if(is_null($customer = Customer::whereEmail($data['email'])->where('account_id', config('account.account_id'))->first())) {
+                $customer = Customer::create(['email' => $data['email'], 'name' => $data['name'], 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'account_id' => config('account.account_id')]);
+                $customer->courses()->sync($course);
+            } else {
+                $customer->courses()->sync($course);
+            }
+            $prospect = Prospect::whereEmail($data['email'])->where('account_id', config('account.account_id'))->first();
+            $prospect->delete();
+            return redirect()->route('account.memberarea.home', $request->route('domain'));
+        } else return redirect()->back();
     }
 
-    public function home($account_subdomain)
+    public function home($domain)
     {
         $customer = Auth::guard('webcustomer');
         $courses = Customer::where('id', $customer->id())->firstOrFail()->courses()->get();
         return view('memberarea.home', compact('courses'));
     }
 
-    public function course($account_subdomain, $courseSlug)
+    public function course($domain, $courseSlug)
     {
-        $course = $this->courseRepository->getCourseBySlug($courseSlug);
+        $course = $this->courseRepository->getCourseActiveBySlug($courseSlug);
         $chapters = Chapter::where('course_id', $course->id)->orderBy('order')->get();
         $lessons = array();
         foreach ($chapters as $chapter){
@@ -77,15 +86,16 @@ class MemberAreaController extends Controller
         return view('memberarea.course', compact('course', 'chapters', 'lessons'));
     }
 
-    public function lesson($account_subdomain, $courseSlug, $lessonSlug)
+    public function lesson($domain, $courseSlug, $chapterSlug, $lessonSlug)
     {
-        $course = $this->courseRepository->getCourseBySlug($courseSlug);
+        $course = $this->courseRepository->getCourseActiveBySlug($courseSlug);
         $chapters = Chapter::where('course_id', $course->id)->orderBy('order')->get();
         $lessons = array();
         foreach ($chapters as $chapter){
             $lessons[$chapter->id] = Lesson::where('chapter_id', $chapter->id)->orderBy('order')->get();
         }
-        $currentLesson = Lesson::whereSlug($lessonSlug)->firstOrFail();
+        $currentChapter = Chapter::whereSlug($chapterSlug)->where('course_id', $course->id)->firstOrFail();
+        $currentLesson = Lesson::whereSlug($lessonSlug)->where('chapter_id', $currentChapter->id)->firstOrFail();
         return view('memberarea.lesson', compact('course', 'chapters', 'lessons', 'currentLesson'));
     }
 }

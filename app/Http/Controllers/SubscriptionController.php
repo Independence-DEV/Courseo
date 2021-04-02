@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Cashier\Cashier;
@@ -30,11 +31,11 @@ class SubscriptionController extends Controller
 
     public function showSubscription() {
         $plans = $this->retrievePlans();
-        $user = Auth::user();
+        $account = Account::where('id', Auth::user()->account_id)->first();
 
         return view('app.subscriptions', [
-            'user'=>$user,
-            'intent' => $user->createSetupIntent(),
+            'account'=> $account,
+            'intent' => $account->createSetupIntent(),
             'plans' => $plans
         ]);
     }

@@ -13,7 +13,6 @@ class CourseRepository
             ->whereActive(true)
             ->customers()
             ->get();
-
         return $courses;
     }
 
@@ -22,7 +21,6 @@ class CourseRepository
         $courses = Course::where('account_id', config('account.account_id'))
             ->whereActive(true)
             ->get();
-
         return $courses;
     }
 
@@ -30,7 +28,6 @@ class CourseRepository
     {
         $courses = Course::where('account_id', config('account.account_id'))
             ->get();
-
         return $courses;
     }
 
@@ -39,7 +36,15 @@ class CourseRepository
         $course = Course::whereSlug($slug)
             ->where('account_id', config('account.account_id'))
             ->firstOrFail();
+        return $course;
+    }
 
+    public function getCourseActiveBySlug($slug)
+    {
+        $course = Course::whereSlug($slug)
+            ->where('account_id', config('account.account_id'))
+            ->whereActive(true)
+            ->firstOrFail();
         return $course;
     }
 }

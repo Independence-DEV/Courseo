@@ -16,7 +16,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             if ($request->routeIs('account.memberarea.*')) {
-                return route('account.memberarea.login', $request->route('account_subdomain'));
+                return route('account.memberarea.login', $request->route('domain'));
             }
             return route('login');
         }

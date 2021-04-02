@@ -27,16 +27,15 @@ class Formcourseprospect extends Component
         $this->success = 'NOK';
 
         if(is_null($prospect = Prospect::where('email', $this->email)->first())) {
-            $prospect = Prospect::create(['email' => $this->email, 'name' => $this->email, 'account_id' => $this->course->id]);
+            $prospect = Prospect::create(['email' => $this->email, 'name' => $this->name, 'account_id' => $this->course->id]);
         }
         $prospect->courses()->sync($this->course);
 
-            /*Mail::to($this->email)
-                ->send(new ProspectCourseMail());
-            $this->success = 'OK';*/
+        Mail::to($this->email)
+            ->send(new ProspectCourseMail());
+        $this->success = 'OK';
 
         $this->clearFields();
-        return redirect('app/website/config');
     }
 
     private function clearFields()

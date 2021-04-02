@@ -17,10 +17,10 @@ class CreateLessonsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('slug');
-            $table->string('video');
+            $table->string('video')->nullable();
             $table->text('content');
             $table->integer('order');
-            $table->boolean('active')->default(false);
+            $table->boolean('active')->default(true);
             $table->foreignId('chapter_id')
                 ->constrained()
                 ->onDelete('cascade')

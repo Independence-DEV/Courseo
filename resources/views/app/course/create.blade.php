@@ -21,8 +21,14 @@
                             <div class="col-span-4 sm:col-span-4">
                                 <x-label for="title" :value="__('Title')" />
 
-                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="isset($account) ? $account->name : ''" required />
+                                <x-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title')" required />
                             </div>
+
+                                <div class="col-span-4 sm:col-span-4">
+                                    <x-label for="slug" :value="__('Slug')" />
+
+                                    <x-input id="slug" class="block mt-1 w-full" type="text" name="slug" :value="old('slug')" required />
+                                </div>
 
                             <div class="col-span-4 sm:col-span-4">
                                 <x-label for="description" :value="__('Description')" />
@@ -36,13 +42,6 @@
                                     <input type="number" min="0" step="any" name="price" id="price" class="w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
                                     <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">€</span>
                                 </div>
-                            </div>
-
-
-                            <div class="col-span-3 sm:col-span-3">
-                                <x-label for="stripe_id" :value="__('Stripe API Key')" :tooltip="__('You can find the Stripe API Key on your Stripe account')" />
-
-                                <x-input id="stripe_id" class="block mt-1 w-full" type="text" name="stripe_id" :value="isset($account) ? $account->name : ''" />
                             </div>
 
                             <div class="col-span-4 sm:col-span-4">
@@ -64,3 +63,45 @@
         </div>
     </div>
 </x-app-layout>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/4.16.0/full/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/speakingurl/14.0.1/speakingurl.min.js"></script>
+<script>
+    $(function() {
+        $.fn.filemanager = function(type, options) {
+            type = type || 'file';
+            this.on('click', function(e) {
+                var route_prefix = (options && options.prefix) ? options.prefix : '/filemanager';
+                var target_input = $('#' + $(this).data('input'));
+                var target_preview = $('#' + $(this).data('preview'));
+                window.open(route_prefix + '?type=' + type, 'FileManager', 'width=900,height=600');
+                window.SetUrl = function (items) {
+                    var file_path = items.map(function (item) {
+                        return item.url;
+                    }).join(',');
+                    // set the value of the desired input to image url
+                    target_input.val('').val(file_path).trigger('change');
+                    // clear previous preview
+                    target_preview.html('');
+                    // set or change the preview image src
+                    items.forEach(function (item) {
+                        target_preview.append(
+                            $('<img>').attr('src', item.thumb_url)
+                        );
+                    });
+                    // trigger change event
+                    target_preview.trigger('change');
+                };
+                return false;
+            });
+        }
+        $('#lfm').filemanager('image');
+        $('#slug').keyup(function () {
+            $(this).val(getSlug($(this).val()))
+        })
+        $('#title').keyup(function () {
+            $('#slug').val(getSlug($(this).val()))
+        })
+    });
+    CKEDITOR.replace('presentation', { customConfig: '{{ asset('js/ckeditor.js') }}' });
+</script>

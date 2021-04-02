@@ -8,10 +8,12 @@ use App\Models\Config;
 use App\Models\IndexPage;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use GuzzleHttp\Client;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use \Ovh\Api;
 
 class RegisteredUserController extends Controller
 {
@@ -22,6 +24,22 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        /*$applicationKey = "2jKdrhusmNkzv9ah";
+        $applicationSecret = "ZOJTU5ESWGzasVs7xo79DGPhuEQ8SwLc";
+        $endpoint = 'ovh-eu';
+        $consumerKey = "Z9o9pt83ehA5KxPKCgJnn7sY8XmC03jQ";
+
+        $client = new Client();
+        $client->setDefaultOption('timeout', 1);
+        $client->setDefaultOption('headers', array('User-Agent' => 'api_client') );
+
+        $conn = new Api($applicationKey,
+            $applicationSecret,
+            $endpoint,
+            $consumerKey,
+            $client);
+        $webHosting = $conn->get('/hosting/web/');*/
+
         return view('auth.register');
     }
 

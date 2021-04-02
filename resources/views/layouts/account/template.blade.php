@@ -29,13 +29,20 @@
 <body class="antialiased">
 <header class="text-gray-600 body-font">
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ route('account.index', ['account_subdomain' => $account->subdomain]) }}">
+        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{ route('account.index', ['domain' => $domain]) }}">
             <img style="max-height: 50px;" src="{{ $config->logo }}" alt="">
             <span class="ml-3 text-xl">{{ $account->name }}</span>
         </a>
         <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-            <a class="mr-5 hover:text-gray-900" href="{{ route('account.posts', ['account_subdomain' => $account->subdomain]) }}">Blog</a>
-            <a class="mr-5 hover:text-gray-900" href="{{ route('account.courses', ['account_subdomain' => $account->subdomain]) }}">Courses</a>
+            @if($postNumber)
+                <a class="mr-5 hover:text-gray-900" href="{{ route('account.posts', ['domain' => $domain]) }}">Blog</a>
+            @endif
+            @if($courseNumber)
+                <a class="mr-5 hover:text-gray-900" href="{{ route('account.courses', ['domain' => $domain]) }}">Courses</a>
+            @endif
+            @foreach($customPages as $customPage)
+                 <a class="mr-5 hover:text-gray-900" href="{{ route('account.page', ['domain' => $domain, 'slug' => $customPage->slug]) }}">{{ $customPage->title }}</a>
+            @endforeach
         </nav>
         <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
             @if($config->facebook_link)

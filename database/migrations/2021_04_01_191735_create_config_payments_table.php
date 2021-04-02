@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoursesTable extends Migration
+class CreateConfigPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,15 @@ class CreateCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('courses', function (Blueprint $table) {
+        Schema::create('config_payments', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug');
-            $table->text('description');
-            $table->text('presentation');
-            $table->string('image')->nullable();
-            $table->integer('price')->default(0);
-            $table->boolean('active')->default(false);
+            $table->string('stripe_publishable_key')->nullable();
+            $table->string('stripe_secret_key')->nullable();
             $table->foreignId('account_id')
                 ->constrained()
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->timestamps();
-            $table->unique(['slug', 'account_id']);
         });
     }
 
@@ -38,6 +32,6 @@ class CreateCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('config_payments');
     }
 }
