@@ -28,7 +28,7 @@ class PostRepository
     }
     public function getHeros()
     {
-        return $this->queryActive()->with('categories')->latest('updated_at')->take(5)->get();
+        return $this->queryActive()->with('categories')->latest('updated_at')->take(3)->get();
     }
     protected function saveCategories($post, $request)
     {

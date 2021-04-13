@@ -39,14 +39,14 @@
 
 
 <section class="text-gray-600 body-font relative">
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 py-6 mx-auto">
         <div class="flex flex-col text-center w-full mb-12">
-            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Contact Us</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify.</p>
+            <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{{ $course->title }}</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base">{{ __('Please fill this form to process the payement and have access to the course.') }}</p>
         </div>
         <div class="lg:w-1/2 md:w-2/3 mx-auto">
             <form id="payment-form"
-                  action="{{ route('account.memberarea.course.processpayment', ['domain' => $account->subdomain, 'courseSlug' => $course->slug, 'prospectId' => $prospect->id]) }}"
+                  action="{{ route('account.memberarea.course.processpayment', ['domain' => $domain, 'courseSlug' => $course->slug, 'prospectId' => $prospect->id]) }}"
                   method="POST">
             @csrf
             <input id="client_secret" name="client_secret" type="hidden" value="{{$intent['client_secret']}}">
@@ -96,7 +96,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-    var stripe = Stripe('pk_test_YBtrdZNcHGQywC1nPS6IwgFx');
+    var stripe = Stripe('{{ $configPayment->stripe_publishable_key }}');
     var elements = stripe.elements();
     var cardElement = elements.create('card', {
         style: {

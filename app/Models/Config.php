@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Config extends Model
 {
     protected $fillable = [
-        'logo', 'email_from', 'lang', 'facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'youtube_link', 'github_link', 'account_id'
+        'logo', 'favicon', 'email_from', 'lang', 'facebook_link', 'twitter_link', 'instagram_link', 'linkedin_link', 'youtube_link', 'github_link', 'account_id'
     ];
 
     public function account(){

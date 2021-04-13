@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactMessage;
+use App\Models\ContactPage;
 use App\Models\Course;
 use App\Models\CustomPage;
 use App\Repositories\CourseRepository;
+use App\Rules\Recaptcha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -35,8 +38,23 @@ class AccountController extends Controller
         return view('account.page', compact('page'));
     }
 
-    public function contact()
+    public function contact(Request $request)
     {
-        return view('account.contact');
+        $contactPage = ContactPage::where('account_id', config('account.account_id'))->firstOrFail();
+        if($contactPage->active) return view('account.contact');
+        return redirect()->route('account.index', $request->domain);
+    }
+
+    public function contactSend(Request $request)
+    {
+        $this->validate($request, [
+            'g-recaptcha-response' => ['required', new Recaptcha()],
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'message' => 'required|string'
+        ]);
+        $data = $request->all();
+        ContactMessage::create($data);
+        return redirect()->route('account.contact', $request->domain);
     }
 }

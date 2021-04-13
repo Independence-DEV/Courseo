@@ -23,8 +23,9 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            'name' => "Site de test",
-            'subdomain' => "test",
+            'name' => "Independence DEV",
+            'subdomain' => "i-dev",
+            'domain' => "independence-dev.com",
         ];
     }
 }

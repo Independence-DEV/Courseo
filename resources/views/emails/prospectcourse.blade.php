@@ -1,8 +1,13 @@
 @component('mail::message')
-    # {{ __('Waiting List') }}
+# {{ __('Course access : ').$course->title }}
 
-    {{ __('You just subscribed to the waiting list. You will receive another email for access to the application.') }}
+{{ __('Hello ').$name.',' }}
 
-    {{ __('Thanks') }},
-    {{ config('app.name') }}
+{{ __('To have your access to this course, please click the button below.') }}
+@component('mail::button', ['url' => 'https://independence-dev.com'.$url])
+Get my course
+@endcomponent
+
+{{ __('Thanks,') }}
+{{ $course->account->name }}
 @endcomponent

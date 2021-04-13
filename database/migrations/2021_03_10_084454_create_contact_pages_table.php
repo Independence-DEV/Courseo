@@ -15,6 +15,11 @@ class CreateContactPagesTable extends Migration
     {
         Schema::create('contact_pages', function (Blueprint $table) {
             $table->id();
+            $table->boolean('active')->default(false);
+            $table->foreignId('account_id')
+                ->constrained()
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

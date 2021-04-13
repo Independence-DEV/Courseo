@@ -22,7 +22,7 @@ class MemberAreaController extends Controller
         $this->courseRepository = $courseRepository;
     }
 
-    public function paymentCourse($courseSlug, Request $request)
+    public function paymentCourse($domain, $courseSlug, Request $request)
     {
         $course = Course::whereSlug($courseSlug)
             ->where('account_id', config('account.account_id'))
@@ -32,13 +32,13 @@ class MemberAreaController extends Controller
             ->firstOrFail();
 
         $stripe = new \Stripe\StripeClient(
-            'sk_test_aitKH26s2pO2HK1KbZrMkUWf'
+            $request->configPayment->stripe_secret_key
         );
         $intent = $stripe->paymentIntents->create([
             'amount' => intval($course->price)*100,
             'currency' => 'eur',
             'payment_method_types' => ['card'],
-            'description' => $course->title,
+            'description' => $course->title.' : '.$prospect->name,
         ]);
         return view('memberarea.payment', compact('course', 'prospect', 'intent'));
     }
@@ -47,7 +47,7 @@ class MemberAreaController extends Controller
     {
         $data = $request->all();
         $stripe = new \Stripe\StripeClient(
-            'sk_test_aitKH26s2pO2HK1KbZrMkUWf'
+            $request->configPayment->stripe_secret_key
         );
         $paymentIntent = $stripe->paymentIntents->retrieve(
             $data['stripe_id']
@@ -64,7 +64,8 @@ class MemberAreaController extends Controller
             }
             $prospect = Prospect::whereEmail($data['email'])->where('account_id', config('account.account_id'))->first();
             $prospect->delete();
-            return redirect()->route('account.memberarea.home', $request->route('domain'));
+            Auth::guard('webcustomer')->login($customer);
+            return redirect()->route('account.memberarea.course', ['domain' => $request->domain, 'slug' => $course->slug]);
         } else return redirect()->back();
     }
 

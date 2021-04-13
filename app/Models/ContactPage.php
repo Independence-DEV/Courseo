@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ContactPage extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'active', 'account_id'
+    ];
+
+    public function account(){
+        return $this->belongsTo(Account::class);
+    }
 }

@@ -17,15 +17,18 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Account::factory(1)->create();
         \App\Models\User::factory(1)->create();
+        \App\Models\AdminUser::factory(1)->create();
         DB::table('configs')->insert([
             [
                 'logo' => '',
-                'email_from' => 'test@test.test',
+                'email_from' => 'contact@independence-dev.com',
                 'lang' => 'fr',
                 'facebook_link' => '',
                 'twitter_link' => '',
                 'instagram_link' => '',
                 'linkedin_link' => '',
+                'youtube_link' => 'https://www.youtube.com/channel/UC3MoCSIKCP-eaoTFUbTOBFg',
+                'github_link' => 'https://github.com/Independence-dev',
                 'account_id' => 1,
             ]
         ]);
@@ -48,6 +51,12 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => '',
                 'active_posts' => 1,
+                'account_id' => 1,
+            ]
+        ]);
+        DB::table('contact_pages')->insert([
+            [
+                'active' => 1,
                 'account_id' => 1,
             ]
         ]);

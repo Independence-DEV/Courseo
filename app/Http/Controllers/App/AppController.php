@@ -5,6 +5,8 @@ namespace App\Http\Controllers\App;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Config;
+use App\Models\ContactMessage;
+use App\Models\ContactPage;
 use App\Models\Course;
 use App\Models\Customer;
 use App\Models\CustomPage;
@@ -85,7 +87,7 @@ class AppController extends Controller
             'logo' => parse_url($request->logo, PHP_URL_PATH),
         ]);
         $data = $request->all();
-        $this->validate($request, ['name' => 'required']);
+        $this->validate($request, ['name' => 'required|string', 'email_from' => 'required|email']);
         $account = Account::where('id', Auth::user()->account_id)->firstOrFail();
         $config = Config::where('account_id', Auth::user()->account_id)->firstOrFail();
         $account->update($data);
@@ -129,7 +131,20 @@ class AppController extends Controller
     public function contactPage()
     {
         $account = Account::where('id', Auth::user()->account_id)->first();
-        return view('app.website.contactpage', compact('account'));
+        $contactPage = ContactPage::where('account_id', Auth::user()->account_id)->firstOrFail();
+        $contactMessages = ContactMessage::where('account_id', Auth::user()->account_id)->paginate(10);
+        return view('app.website.contactpage', compact('account', 'contactPage', 'contactMessages'));
+    }
+
+    public function contactPageEdit(Request $request)
+    {
+        $data = $request->all();
+        if(isset($data['active']) && ($data['active'] == 'on')) $data['active'] = 1;
+        else $data['active'] = 0;
+        //$this->validate($request, ['content' => 'required']);
+        $contactPage = ContactPage::where('account_id', Auth::user()->account_id)->firstOrFail();
+        $contactPage->update($data);
+        return redirect('app/website/contactPage');
     }
 
     public function customPageList()

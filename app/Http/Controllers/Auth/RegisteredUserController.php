@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\Config;
+use App\Models\ConfigPayment;
+use App\Models\ContactPage;
 use App\Models\IndexPage;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -13,7 +15,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use \Ovh\Api;
+use App\Mail\NewUser;
 
 class RegisteredUserController extends Controller
 {
@@ -22,7 +26,7 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
         /*$applicationKey = "2jKdrhusmNkzv9ah";
         $applicationSecret = "ZOJTU5ESWGzasVs7xo79DGPhuEQ8SwLc";
@@ -40,7 +44,8 @@ class RegisteredUserController extends Controller
             $client);
         $webHosting = $conn->get('/hosting/web/');*/
 
-        return view('auth.register');
+        $email = $request->email;
+        return view('auth.register', compact('email'));
     }
 
     /**
@@ -74,6 +79,12 @@ class RegisteredUserController extends Controller
         ]));
 
         Config::create([
+            'email_from' => $request->email,
+            'lang' => 'en',
+            'account_id' => $account->id
+        ]);
+
+        ConfigPayment::create([
             'account_id' => $account->id
         ]);
 
@@ -82,7 +93,15 @@ class RegisteredUserController extends Controller
             'account_id' => $account->id
         ]);
 
+        ContactPage::create([
+            'active' => 0,
+            'account_id' => $account->id
+        ]);
+
         event(new Registered($user));
+
+        Mail::to($request->email)
+            ->send(new NewUser($request->name, $request->subdomain.'.'.env('APP_DOMAIN')));
 
         return redirect(RouteServiceProvider::HOME);
     }

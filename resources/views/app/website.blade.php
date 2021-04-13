@@ -47,7 +47,7 @@
 
                                                 <div class="col-span-3 sm:col-span-2">
 
-                                                    <x-label for="email_from" :value="__('Email From')" />
+                                                    <x-label for="email_from" :value="__('Email Reply-To')" />
 
                                                     <x-input id="email_from" class="block mt-1 w-full" type="email" name="email_from" :value="isset($config) ? $config->email_from : ''" />
 
@@ -85,8 +85,6 @@
                                                     <x-input id="twitter_link" class="block mt-1 w-full" type="text" name="twitter_link" :value="isset($config) ? $config->twitter_link : ''" />
                                                 </div>
                                             </div>
-
-
                                             <div class="grid grid-cols-4 gap-6">
                                                 <div class="col-span-3 sm:col-span-2">
                                                     <x-label for="instagram_link" :value="__('Instagram Link')" />
@@ -99,8 +97,18 @@
                                                     <x-input id="linkedin_link" class="block mt-1 w-full" type="text" name="linkedin_link" :value="isset($config) ? $config->linkedin_link : ''" />
                                                 </div>
                                             </div>
+                                            <div class="grid grid-cols-4 gap-6">
+                                                <div class="col-span-3 sm:col-span-2">
+                                                    <x-label for="youtube_link" :value="__('YouTube Link')" />
 
+                                                    <x-input id="youtube_link" class="block mt-1 w-full" type="text" name="youtube_link" :value="isset($config) ? $config->youtube_link : ''" />
+                                                </div>
+                                                <div class="col-span-3 sm:col-span-2">
+                                                    <x-label for="github_link" :value="__('GitHub Link')" />
 
+                                                    <x-input id="github_link" class="block mt-1 w-full" type="text" name="github_link" :value="isset($config) ? $config->github_link : ''" />
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                             <x-button class="ml-3">

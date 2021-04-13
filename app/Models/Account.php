@@ -35,6 +35,10 @@ class Account extends Model
         return $this->hasOne(IndexPage::class);
     }
 
+    public function contactPage(){
+        return $this->hasOne(ContactPage::class);
+    }
+
     public function config(){
         return $this->hasOne(Config::class);
     }
@@ -53,5 +57,9 @@ class Account extends Model
 
     public function customPages(){
         return $this->hasMany(CustomPage::class);
+    }
+
+    public function contactMessages(){
+        return $this->hasMany(ContactMessage::class);
     }
 }

@@ -12,15 +12,20 @@ class ProspectCourseMail extends Mailable
     use Queueable, SerializesModels;
 
     public $contact;
+    private $url;
+    private $course;
+    private $name;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($url, $course, $name)
     {
-
+        $this->url = $url;
+        $this->course = $course;
+        $this->name = $name;
     }
 
     /**
@@ -30,7 +35,12 @@ class ProspectCourseMail extends Mailable
      */
     public function build()
     {
-        return $this->from('contact@courseo.tech', config('app.name'))
-            ->markdown('emails.waitinglist');
+        return $this->from('hello@courseo.tech', $this->course->account->name)
+            ->replyTo($this->course->account->config->email_from, $this->course->account->name)
+            ->subject('Course access : '.$this->course->title)
+            ->markdown('emails.prospectcourse')
+            ->with('url', $this->url)
+            ->with('course', $this->course)
+            ->with('name', $this->name);
     }
 }

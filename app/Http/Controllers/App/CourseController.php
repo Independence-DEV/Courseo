@@ -89,10 +89,24 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge([
+            'image' => parse_url($request->image, PHP_URL_PATH),
+        ]);
         $data = $request->all();
         $data['slug'] = Str::slug($data['title']);
         $data['account_id'] = Auth::user()->account_id;
         $id = Course::create($data)->id;
+        return redirect()->route('app.courses.course.edit', ['id' => $id]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $request->merge([
+            'image' => parse_url($request->image, PHP_URL_PATH),
+        ]);
+        $data = $request->all();
+        $course = Course::find($id);
+        $course->update($data);
         return redirect()->route('app.courses.course.edit', ['id' => $id]);
     }
 

@@ -79,7 +79,7 @@
                 <div class="grid grid-cols-3 gap-4">
 
                     <div class="col-span-3 bg-white sm:col-span-2 shadow sm:rounded-md sm:overflow-hidden">
-                        <form action="{{ route('app.courses.course.store') }}" method="POST">
+                        <form action="{{ route('app.courses.course.update', ['id' => $course->id]) }}" method="POST">
                             @csrf
                             <div class="px-4 py-5 space-y-6 sm:p-6 ">
                                 <div class="grid grid-cols-4 gap-4">
@@ -99,6 +99,19 @@
                                         <x-label for="description" :value="__('Description')" />
 
                                         <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="$course->description" required />
+                                    </div>
+
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <x-label for="image" :value="__('Image')" />
+                                        <a id="lfm" data-input="image" data-preview="holder" class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg" type="button">{{ __('Add an image') }}</a>
+                                        <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="isset($course->image) ? $course->image : ''" readonly />
+                                    </div>
+                                    <div class="col-span-3 sm:col-span-2">
+                                        <div id="holder" class="text-center" style="margin-bottom:15px;">
+                                            @isset($course->image)
+                                                <img style="max-height: 250px;" src="{{ $course->image }}" alt="">
+                                            @endisset
+                                        </div>
                                     </div>
 
                                     <div class="col-span-1 sm:col-span-1">

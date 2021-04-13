@@ -19,6 +19,7 @@ class CreateAccountsTable extends Migration
             $table->string('subdomain');
             $table->string('domain')->nullable();
             $table->timestamps();
+            $table->unique('subdomain');
         });
     }
 

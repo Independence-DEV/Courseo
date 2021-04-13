@@ -3,10 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Mail\ProspectCourseMail;
-use App\Mail\ProspectMail;
-use App\Mail\WaitingListMail;
 use App\Models\Prospect;
-use App\Models\WaitingList;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
@@ -31,8 +28,13 @@ class Formcourseprospect extends Component
         }
         $prospect->courses()->sync($this->course);
 
+        $url = '/memberarea/course/'.$this->course->slug.'/payment?prospectEmail='.$prospect->email;
+
+        /*if($this->price == 0) $url = route('account.memberarea.course.payment');
+        else $url = 'f';*/
+
         Mail::to($this->email)
-            ->send(new ProspectCourseMail());
+            ->send(new ProspectCourseMail($url, $this->course, $this->name));
         $this->success = 'OK';
 
         $this->clearFields();

@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::pattern('domain', '^((?!www).)*$');
 
-Route::middleware('subdomain')->domain('{domain}.'.env('APP_URL'))->group(function (){
+Route::middleware('subdomain')->domain('{domain}.'.env('APP_DOMAIN'))->group(function (){
     Route::name('account.index')->get('/', [AccountPostController::class, 'index']);
     Route::name('account.contact')->get('/contact', [AccountController::class, 'contact']);
+    Route::name('account.contact.send')->post('/contact/send', [AccountController::class, 'contactSend']);
     Route::name('account.posts')->get('/posts', [AccountPostController::class, 'posts']);
     Route::name('account.post')->get('/post/{slug}', [AccountPostController::class, 'post']);
     Route::name('account.courses')->get('/courses', [AccountCourseController::class, 'courses']);

@@ -19,8 +19,8 @@ class CreateCustomPagesTable extends Migration
             $table->string('slug');
             $table->string('seo_title')->nullable();
             $table->text('content');
-            $table->text('meta_description');
-            $table->text('meta_keywords');
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->boolean('active')->default(true);
             $table->foreignId('account_id')
                 ->constrained()

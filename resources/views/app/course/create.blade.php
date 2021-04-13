@@ -36,6 +36,19 @@
                                 <x-textarea id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description')" required />
                             </div>
 
+                                <div class="col-span-3 sm:col-span-2">
+                                    <x-label for="image" :value="__('Image')" />
+                                    <a id="lfm" data-input="image" data-preview="holder" class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg" type="button">{{ __('Add an image') }}</a>
+                                    <x-input id="image" class="block mt-1 w-full" type="text" name="image" :value="isset($course->image) ? $course->image : ''" readonly />
+                                </div>
+                                <div class="col-span-3 sm:col-span-2">
+                                    <div id="holder" class="text-center" style="margin-bottom:15px;">
+                                        @isset($course->image)
+                                            <img style="max-height: 250px;" src="{{ $course->image }}" alt="">
+                                        @endisset
+                                    </div>
+                                </div>
+
                             <div class="col-span-1 sm:col-span-1">
                                 <x-label for="price" :value="__('Price')" />
                                 <div class="mt-1 flex rounded-md shadow-sm">

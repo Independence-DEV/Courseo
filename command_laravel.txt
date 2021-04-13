@@ -21,3 +21,6 @@ php artisan event:clear
 php artisan cache:clear
 
 php artisan optimize:clear
+
+php artisan make:mail NewUser
+php artisan make:mail NewUser --markdown=emails.newuser

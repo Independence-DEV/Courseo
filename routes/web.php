@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Account\AccountController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\App\AppController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\WelcomeController;
@@ -23,17 +24,16 @@ require __DIR__.'/auth.php';
 |
 */
 
-
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => 'auth'], function () {
     Lfm::routes();
 });
 
-Route::middleware('web')->domain('courseo.test')->group(function (){
+Route::middleware('web')->domain(env('APP_DOMAIN'))->group(function (){
     Route::name('welcome')->get('/', [WelcomeController::class, 'welcome']);
     Route::name('LangChange')->get('lang/{locale}', [LocalizationController::class, 'lang']);
 });
 
-Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'auth'], function() {
+Route::group(['domain' => env('APP_DOMAIN'),'prefix' => 'app', 'middleware' => 'auth'], function() {
     Route::name('app.settings')->get('/settings', [AppController::class, 'settings']);
     Route::name('app.user.edit')->post('/settings/edit', [AppController::class, 'editUser']);
     Route::name('app.dashboard')->get('/', [AppController::class, 'dashboard']);
@@ -45,6 +45,7 @@ Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'aut
     Route::name('app.website.indexPage')->get('/website/indexPage', [AppController::class, 'indexPage']);
     Route::name('app.website.indexPage.edit')->post('/website/indexPage/edit', [AppController::class, 'indexPageEdit']);
     Route::name('app.website.contactPage')->get('/website/contactPage', [AppController::class, 'contactPage']);
+    Route::name('app.website.contactPage.edit')->post('/website/contactPage/edit', [AppController::class, 'contactPageEdit']);
     Route::name('app.website.custompage.list')->get('/website/custompage/list', [AppController::class, 'customPageList']);
     Route::name('app.website.custompage.create')->get('/website/custompage/create', [AppController::class, 'customPageCreate']);
     Route::name('app.website.custompage.store')->post('/website/custompage/store', [AppController::class, 'customPageStore']);
@@ -70,6 +71,7 @@ Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'aut
     Route::name('app.courses.list')->get('/courses/list', [AppCourseController::class, 'courses']);
     Route::name('app.courses.course.create')->get('/courses/course/create', [AppCourseController::class, 'create']);
     Route::name('app.courses.course.store')->post('/courses/course/store', [AppCourseController::class, 'store']);
+    Route::name('app.courses.course.update')->post('/courses/course/update/{id}', [AppCourseController::class, 'update']);
     Route::name('app.courses.course.edit')->get('/courses/course/edit/{id}', [AppCourseController::class, 'edit']);
     Route::name('app.courses.course.edit.chapter.create')->get('/courses/course/edit/{id}/chapter/create', [AppCourseController::class, 'createChapter']);
     Route::name('app.courses.course.edit.chapter.store')->post('/courses/course/edit/{id}/chapter/store', [AppCourseController::class, 'storeChapter']);
@@ -81,4 +83,12 @@ Route::group(['domain' => env('APP_URL'),'prefix' => 'app', 'middleware' => 'aut
     Route::name('app.courses.customers')->get('/courses/customers', [AppCourseController::class, 'customers']);
 });
 
-
+Route::group(['domain' => env('APP_DOMAIN'), 'prefix' => 'admin'], function() {
+    Route::name('admin.login')->get('/login', [AdminController::class, 'login']);
+    Route::name('admin.handleLogin')->post('/login', [AdminController::class, 'handleLogin']);
+    Route::name('admin.logout')->get('/logout', [AdminController::class, 'logout']);
+    Route::name('admin.dashboard')->get('/', [AdminController::class, 'dashboard'])->middleware('auth:admin');
+    Route::name('admin.waitinglist')->get('/waitinglist', [AdminController::class, 'waitinglist'])->middleware('auth:admin');
+    Route::name('admin.waitinglist.sendaccess')->get('/waitinglist/sendaccess/{id}', [AdminController::class, 'waitinglist_sendaccess'])->middleware('auth:admin');
+    Route::name('admin.accounts')->get('/accounts', [AdminController::class, 'accounts'])->middleware('auth:admin');
+});

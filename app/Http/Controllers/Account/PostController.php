@@ -28,8 +28,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $heros = $this->postRepository->getHeros();
         $indexPage = IndexPage::where('account_id', config('account.account_id'))->first();
+        $heros = null;
+        if($indexPage->active_posts) $heros = $this->postRepository->getHeros();
         return view('account.index', compact( 'heros', 'indexPage'));
     }
 

@@ -125,9 +125,10 @@ class PostController extends Controller
         $post->tags()->sync($tags_id);
     }
 
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        $post->delete();
-        return response()->json();
+        $post = Post::find($id);
+        if(!$post->active) $post->delete();
+        return back();
     }
 }

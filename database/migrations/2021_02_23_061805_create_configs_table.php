@@ -16,6 +16,7 @@ class CreateConfigsTable extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->id();
             $table->string('logo')->nullable();
+            $table->string('favicon')->nullable();
             $table->string('email_from');
             $table->string('lang');
             $table->string('facebook_link')->nullable();

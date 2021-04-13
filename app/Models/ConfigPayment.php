@@ -10,7 +10,7 @@ class ConfigPayment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'stripe_publishable_key', 'stripe_secret_key'
+        'stripe_publishable_key', 'stripe_secret_key', 'account_id'
     ];
 
     public function account(){
