@@ -13,9 +13,8 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo(Request $request)
+    protected function redirectTo($request)
     {
-        $test = $request->getHost();
         if (! $request->expectsJson()) {
             if ($request->routeIs('account.memberarea.*')) {
                 return route('account.memberarea.login', $request->getHost());
