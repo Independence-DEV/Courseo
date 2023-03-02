@@ -21,8 +21,8 @@ class Formwaitinglist extends Component
         $this->success = 'NOK';
         if(is_null(WaitingList::where('email', $this->email)->first())){
             WaitingList::create(['email' => $this->email, 'lang' => app()->getLocale()]);
-            Mail::to($this->email)
-                ->send(new WaitingListMail());
+            /*Mail::to($this->email)
+                ->send(new WaitingListMail());*/
             $this->success = 'OK';
         }
         $this->clearFields();

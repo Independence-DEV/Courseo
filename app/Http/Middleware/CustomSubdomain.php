@@ -30,7 +30,7 @@ class CustomSubdomain
         $config = Config::where('account_id', $account->id)->firstOrFail();
         $courseNumber = Course::where('account_id', $account->id)->whereActive(true)->count();
         $postNumber = Post::where('account_id', $account->id)->whereActive(true)->count();
-        $customPages = CustomPage::where('account_id', $account->id)->get();
+        $customPages = CustomPage::where('account_id', $account->id)->whereActive(true)->get();
         $contactPage = ContactPage::where('account_id', $account->id)->firstOrFail();
         $configPayment = ConfigPayment::where('account_id', $account->id)->firstOrFail();
 
