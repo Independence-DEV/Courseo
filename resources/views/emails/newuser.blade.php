@@ -3,7 +3,7 @@
 
 {{ __('You can start to work on your website!') }}
 
-@component('mail::button', ['url' => 'https://courseo.tech/app'])
+@component('mail::button', ['url' => 'https://courseo.xyz/app'])
 My Courseo Access
 @endcomponent
 

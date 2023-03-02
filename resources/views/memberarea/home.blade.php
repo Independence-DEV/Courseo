@@ -40,7 +40,7 @@
 
                 <div class="absolute bottom-0 my-8">
                     <p class="flex items-center py-2 px-8 text-sm text-gray-500 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-                        {{ __('Powered by') }}<a href="https://courseo.tech/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a>
+                        {{ __('Powered by') }}<a href="https://courseo.xyz/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a>
                     </p>
                 </div>
             </div>

@@ -60,7 +60,7 @@
                   </span>
                         <input type="text" name="subdomain" id="subdomain" class="w-full bg-gray-100 bg-opacity-50 border border-gray-300 focus:ring-2 focus:ring-red-200 focus:bg-transparent focus:border-red-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" required>
                         <span class="inline-flex items-center px-3 rounded-r-md border border-l-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
-                    .courseo.tech
+                    .courseo.xyz
                   </span>
                     </div>
                 </div>

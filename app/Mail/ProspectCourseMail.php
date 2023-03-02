@@ -35,7 +35,7 @@ class ProspectCourseMail extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@courseo.tech', $this->course->account->name)
+        return $this->from('hello@courseo.xyz', $this->course->account->name)
             ->replyTo($this->course->account->config->email_from, $this->course->account->name)
             ->subject('Course access : '.$this->course->title)
             ->markdown('emails.prospectcourse')

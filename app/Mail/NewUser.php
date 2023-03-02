@@ -32,7 +32,7 @@ class NewUser extends Mailable
      */
     public function build()
     {
-        return $this->from('contact@courseo.tech', config('app.name'))
+        return $this->from('contact@courseo.xyz', config('app.name'))
             ->subject('Welcome!')
             ->markdown('emails.newuser')
             ->with('name', $this->name)

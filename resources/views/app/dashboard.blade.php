@@ -73,7 +73,7 @@
                         <div class="mx-5">
                         <div class="text-3xl font-bold">It's a MVP (Minimum Viable Product).</div><br />
                         <div class="text-2xl font-bold">Courseo is still in development. There are some bugs and some functionalities missing.</div>
-                        <div class="text-2xl font-bold">You can send an email at : contact@courseo.tech</div>
+                        <div class="text-2xl font-bold">You can send an email at : contact@courseo.xyz</div>
                         </div>
                     </div>
                 </div>

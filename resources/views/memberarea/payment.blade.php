@@ -88,7 +88,7 @@
 <footer class="text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <p class="text-sm text-gray-500 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-            {{ __('Powered by') }}<a href="https://courseo.tech/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a>
+            {{ __('Powered by') }}<a href="https://courseo.xyz/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a>
         </p>
     </div>
 </footer>

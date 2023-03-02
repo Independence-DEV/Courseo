@@ -30,7 +30,7 @@ class SendAccess extends Mailable
      */
     public function build()
     {
-        return $this->from('hello@courseo.tech', 'Courseo')
+        return $this->from('hello@courseo.xyz', 'Courseo')
             ->subject('Courseo is ready!')
             ->markdown('emails.sendaccess')
             ->with('prospect', $this->prospect);
