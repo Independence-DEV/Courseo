@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html class="no-js" lang="{{ $config->lang }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -95,7 +95,7 @@
 <footer class="text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
         <p class="text-sm text-gray-500 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
-            {{ __('Powered by') }}<a href="https://courseo.xyz/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a>
+            {{ __('Powered by') }}<a href="https://courseo.xyz/" class="underline text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">Courseo</a> (theme 1)
         </p>
     </div>
 </footer>

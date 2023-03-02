@@ -23,5 +23,12 @@
 
     "Waiting List" : "Liste d'attente",
     "You just subscribed to the waiting list. You will receive another email for access to the application." : "Vous venez de vous inscrire à la liste d'attente. Vous recevrez un autre e-mail pour accéder à l'application.",
-    "Thanks" : "Merci"
+    "Thanks" : "Merci",
+
+    "Read More": "Lire la suite",
+    "Showing": "Voir",
+    "to": "à",
+    "of": "de",
+    "results": "résultats",
+    "See Course": "Voir le cours"
 }

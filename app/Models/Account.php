@@ -12,7 +12,7 @@ class Account extends Model
     use Billable;
 
     protected $fillable = [
-        'name', 'subdomain', 'domain', 'account_id'
+        'name', 'subdomain', 'domain'
     ];
 
     public function users(){

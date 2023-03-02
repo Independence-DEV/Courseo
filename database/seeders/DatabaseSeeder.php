@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\Account::factory(1)->create();
         \App\Models\User::factory(1)->create();
         \App\Models\AdminUser::factory(1)->create();
+        DB::table('themes')->insert([
+            [
+                'name' => 'Default',
+            ]
+        ]);
         DB::table('configs')->insert([
             [
                 'logo' => '',
@@ -29,6 +34,7 @@ class DatabaseSeeder extends Seeder
                 'linkedin_link' => '',
                 'youtube_link' => 'https://www.youtube.com/channel/UC3MoCSIKCP-eaoTFUbTOBFg',
                 'github_link' => 'https://github.com/Independence-dev',
+                'theme_id' => 1,
                 'account_id' => 1,
             ]
         ]);

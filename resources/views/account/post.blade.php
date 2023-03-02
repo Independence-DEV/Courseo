@@ -1,4 +1,4 @@
-@extends('layouts.account.template')
+@extends('layouts.account.theme'.$config->theme_id)
 
 @section('main')
     <section class="text-gray-600 body-font">

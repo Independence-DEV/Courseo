@@ -25,6 +25,8 @@ class CreateConfigsTable extends Migration
             $table->string('linkedin_link')->nullable();
             $table->string('youtube_link')->nullable();
             $table->string('github_link')->nullable();
+            $table->foreignId('theme_id')
+                ->constrained();
             $table->foreignId('account_id')
                 ->constrained()
                 ->onDelete('cascade')

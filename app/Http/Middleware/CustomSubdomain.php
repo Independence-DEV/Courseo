@@ -11,6 +11,7 @@ use App\Models\Post;
 use Closure;
 use Illuminate\Http\Request;
 use App\Models\Account;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 
@@ -43,6 +44,9 @@ class CustomSubdomain
             'account' => $account,
             'configPayment' => $configPayment,
         ]);
+
+        App::setLocale($config->lang);
+        session()->put('locale', $config->lang);
 
         // Share tentant data with your views for easier
         // customization across the board
