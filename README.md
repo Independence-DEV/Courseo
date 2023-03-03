@@ -1,5 +1,7 @@
 # Courseo
-A simple platform to sell your online courses : https://courseo.xyz/
+A simple platform to sell your online courses :https://courseo.xyz/
+
+Example of website generate with Courseo : https://i-dev.courseo.xyz/
 ## Steps to deploy the application
 `php composer update`
 
